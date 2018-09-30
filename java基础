@@ -1,0 +1,111 @@
+final:用在基本类型上，值不变。用在对象（包括数组）上，对象的引用不变，对象可以改变
+	  final加static与不加：（加是类变量，不加是成员变量）当一个常数或字符串我们需要在程序里反复使用的时候，我们就可以把它定义为static final，这样内存就不用重复的申请和释放空间。
+	  final必须进行初始化，空白final在构造器中初始化
+	  final方法、类：禁止覆盖
+static:用在方法与变量上时，不声明为private时可以用类名直接访问。静态方法无法被重写。它们不属于类的对象，与所有的对象实例共享，不具有线程安全性。静态方法不能访问非静态成员变量与方法，非静态方法可以访问任意成员变量与方法。
+	   用在类上时，只能是静态内部类，可以用作类的builder模式，它与普通内部类的区别是：
+			1.和静态方法一样 
+			2.非静态内部类不能声明静态变量和方法 
+			3.静态内部类可以单独初始化Inner i = new Outer.Inner();非静态内部类：先实例化外部类，再实例化内部类
+	   静态块：类加载时初始化一些参数，只执行一次
+
+java内存模型：堆，栈，方法区，程序计数器。堆分为年轻代与老年代，年轻代分为Eden与两个survival。栈分为本地方法栈与虚拟机栈。
+GC：年轻代存放新创建的对象，GC时把Eden与一个survival区存放的对象复制到另一个survival，把老年代回收后的对象压缩空间，避免碎片。
+    根据根搜索算法判断是否回收，根为引用的对象，向下搜索没有在引用链上的对象被回收。
+    回收时采用分代法与分区法回收，年轻代采用复制法回收，老年代采用标记压缩法回收。除此之外还有引用计数法，标记删除法（碎片）
+
+nio:核心：channel & buffer、异步IO、selector	Mina是NIO
+		Channel既可以进行读，也可以进行写
+
+obj.toString():null对象会报错		String.valueOf(obj):null对象会返回'null'		(String)强转容易出错,(String)null合法
+
+map.forEach((k,v) -> System.out.println(v));		list.forEach(v -> System.out.println(v));
+
+equals方法比较值是否相等，==比较地址是否相等		改写类的equals方法时需要改写类的hashCode方法，因为两个逻辑相等的对象hashCode可能不同
+
+Spring IOC：将一个对象注入到另一个对象，有xml和注解方式，可以手动注入和自动注入。
+			手动：通过set方法和构造函数方式			自动：byType,byName,构造函数
+			注解：@Autowired,可以注入成员变量，方法，构造函数		@Resource默认byName，可以注入成员变量，方法		@Value("${jdbc.url}")注入简单值类型，与properties文件结合使用
+			Bean作用域：Singleton，整个程序只有一个		prototype：每次都会新创建实例对象
+IOC控制反转		DI依赖注入
+
+spring三种装配Bean的方法：1.xml中显式配置	2.用@Configuration和@Bean配置	3.隐式：用@Component标记组件，用@Confi和@ComponentScan扫描配置组件
+																					用@Autowired自动注入
+
+https://www.cnblogs.com/lixiaolun/p/4311727.html		java中的类修饰符、成员变量修饰符、方法修饰符
+
+Enum:构造方法为private，类为final不能被继承	枚举已经生成了对象	方法：name(),ordinary(),values()		https://blog.csdn.net/javazejian/article/details/71333103
+	 EnumMap：key只能是Enum，数组实现，效率更高
+
+泛型：参数类型化，在使用时传入具体的参数，集合中还可以避免一些类型转换出错，泛型逻辑上是多个不同类型，实际是在编译时检验正确后会擦除泛型信息，运行时是相同的类型
+	  类型通配符：？	通配符上界<? extends ..> <? super ..>
+
+单例模式：确保整个系统中某个类只实例化了一个实例，实际应用中，线程池、缓存、日志对象、对话框对象常被设计成单例
+	  
+简单工厂模式：由一个工厂类根据传入的参数决定创建哪一种产品类。spring IOC使用这种方式
+			优点：降低耦合，不用关心产品类如何实现，在工厂方法中对产品类进行约束
+	 
+native关键字：java方法不是用java代码写的
+
+40个Java多线程问题总结			http://www.cnblogs.com/xrq730/p/5060921.html
+
+sleep与wait：sleep不释放锁，必须捕获异常，wait释放锁，可以不指定时间。sleep来自Thread类，wait来自object类
+
+synchronized：		https://www.jb51.net/article/93831.htm
+
+ReetrantReadWriteLock：
+1.Java并发库中ReetrantReadWriteLock实现了ReadWriteLock接口并添加了可重入的特性
+2.ReetrantReadWriteLock读写锁的效率明显高于synchronized关键字
+3.ReetrantReadWriteLock读写锁的实现中，读锁使用共享模式；写锁使用独占模式，换句话说，读锁可以在没有写锁的时候被多个线程同时持有，写锁是独占的
+4.ReetrantReadWriteLock读写锁的实现中，需要注意的，当有读锁时，写锁就不能获得；而当有写锁时，除了获得写锁的这个线程可以获得读锁外，其他线程不能获得读锁
+
+ReentantLock:相比synchronized，增加了一些高级特性：可中断响应、锁申请等待限时、公平锁。另外可以结合Condition来使用		https://blog.csdn.net/Somhu/article/details/78874634
+
+HashMap:内部采用数组+链表的实现方式，主体是一个Entry数组，put的时候空间不够时会扩充为原来的2倍,hash冲突时存进链表，在java8中冲突变多时存进红黑树
+
+ConcurrentHashMap：其中的"分段锁"的方案，相比HashTable的全表锁在性能上的提升非常大。它主体是一个segment数组，segment继承了ReentrantLock，每个segment里是一个HashEntry数组
+
+一次完整的Http请求：解析域名，TCP三次握手，发送HTTP请求，浏览器解析返回的HTML，请求js、css、图片等资源，浏览器渲染页面
+		请求信息：请求方法、URL、协议版本，请求头，请求体
+		响应信息：状态行，响应头，响应正文		响应头包含Location,server,content-Encoding..
+		状态码：- 1xx: 指示信息—表示请求已接收，继续处理。
+				- 2xx: 成功—表示请求已经被成功接收、理解、接受。
+				- 3xx: 重定向—要完成请求必须进行更进一步的操作。
+				- 4xx: 客户端错误—请求有语法错误或请求无法实现。
+				- 5xx: 服务器端错误—服务器未能实现合法的请求。
+
+java的8种数据类型：boolean(1),byte(8),char(16),short(16),int(32),long(64),float(32),double(64)
+大整数类与大浮点数类：BigInteger,BigDecimal
+	
+java线程池：
+
+jvm内存模型：
+
+方法重写应遵循“三同一小一大”原则：
+“三同”：即方法名相同，形参列表相同，返回值类型相同；
+“一小”：子类方法声明抛出的异常比父类方法声明抛出的异常更小或者相等；
+“一大”:子类方法的访问修饰符应比父类方法更大或相等。	
+
+intValue()是把Integer对象类型变成int的基础数据类型； 
+parseInt()是把String 变成int的基础数据类型； 
+Valueof()是把String 转化成Integer对象类型；
+
+JVM类加载机制： 加载	验证	准备	解析	初始化
+				启动类加载器(Bootstrap ClassLoader)：负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath参数指定路径中的，且被虚拟机认可（按文件名识别，如rt.jar）的类。
+				扩展类加载器(Extension ClassLoader)：负责加载 JAVA_HOME\lib\ext 目录中的，或通过java.ext.dirs系统变量指定路径中的类库。
+				应用程序类加载器(Application ClassLoader)：负责加载用户路径（classpath）上的类库。
+双亲委派模型：当一个类加载器收到类加载任务，会先交给其父类加载器去完成，只有当父类加载器无法完成加载任务时，才会尝试执行加载任务。
+通过继承java.lang.ClassLoader实现自定义的类加载器
+
+继承问题：当子类中存在和父类同名属性,父类属性会隐藏起来,在多态的情况下属性被调用时会激活父类属性子类属性隐藏起来,而方法不会隐藏,一旦被重写,只能使用super来在子类调用
+
+java自带序列化问题：默认的序列化格式将会体现类内部的格式，可能会暴露私有域；
+			默认序列化的过程是迭代的，这样可能会造成栈溢出；
+			默认序列化的过程可能消耗大量内存空间和时间；
+
+对象数组：A[] aArray = new A[10];(动态)			A[] aArray = new A[]{new A(),new A(),...};(静态)
+			
+
+
+
+				
