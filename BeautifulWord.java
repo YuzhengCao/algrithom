@@ -44,7 +44,7 @@ public class BeautifulWord {
 					if (check(tmp, a, b)) sum++;
 				} else {
 					for (int j = 0; j < v.size(); j++) {
-						tmp.set(v.get(j), a);
+						tmp.set(v.get(j) - 1, a);
 					}
 					if (check(tmp, a, b)) sum++;
 				}
