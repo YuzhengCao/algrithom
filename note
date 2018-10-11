@@ -1,0 +1,155 @@
+openlayers:
+
+fastdfs:
+
+List<?>的使用是在不确定返回的集合泛型是什么类型的情况下所采用的一种方式。？表示是无限制的通配符。参数是可以任何的类型。
+https://zhidao.baidu.com/question/135819256365307645.html		JavaBean，POJO，VO，DTO的区别和联系
+1L 1,long类型	1f,float类型
+https://blog.csdn.net/cgf1993/article/details/50754584		<? extends SomeClass>与<T extends SomeClass>的区别		
+java使用省略号代替多参数（参数类型... 参数名）
+https://www.cnblogs.com/hwaggLee/p/4778101.html			Spring Assert 断言
+https://blog.csdn.net/yu102655/article/details/52440754 	Hibernate之Criteria查询
+https://blog.csdn.net/cuiran/article/details/6324083		hibernate_Restrictions用法
+https://blog.csdn.net/yin380697242/article/details/52049999		Java正则表达式Pattern和Matcher类详解
+https://blog.csdn.net/yaerfeng/article/details/7618448		HibernateCallback()详解
+
+ehcache与redis的区别
+1.redis的数据结构比较丰富，有key-value、hash、set等；ehcache比较简单，只有key-value
+2.ehcache直接在jvm虚拟机中缓存，速度快，效率高；但是缓存共享麻烦，集群分布式应用不方便。redis是通过socket访问到缓存服务，
+效率ecache低，比数据库要快很多，处理集群和分布式缓存方便，有成熟的方案。如果是单个应用或者对缓存访问要求很高的应用，用ehcache。
+如果是大型系统，存在缓存共享、分布式部署、缓存内容很大的，建议用redis。
+
+Spring boot:
+	@SpringBootApplication 注解等价于以默认属性使用 @Configuration ， @EnableAutoConfiguration 和 @ComponentScan
+	
+	
+	https://blog.csdn.net/zane3/article/details/73729717		SpringBoot启动服务的三种方式
+	https://www.cnblogs.com/m4tech/p/6610301.html				Springboot 常用注解
+	
+	@Controller,@RestController,@RequestMapping
+	@PathVariable,@ModelAttribute,@RequestParam
+	
+	RESTful API:表述性状态转移，表述性就是指资源，资源的标识是URI，统一资源标识符，RESTful架构应该遵循统一接口原则，使用标准的HTTP方法如GET，PUT和POST获取资源
+	
+SOA（面向服务技术架构）
+
+CMU（Center Manager Unit），即中心管理单位
+PU（Prefocus Unit），即监控前端单元，负责在CMU的控制下使用摄像机采集视频流、使用麦克风采集音频流、使用控制口采集报警信息、对摄像机云台镜头进行控制。
+CU（Client Unit），监控系统的监控客户端单元，负责将PU采集到的视频流、音频流、报警信息提交给监控用户，并根据用户要求操作PU设备，如云台、镜头等。
+NCG：联网网关
+联网网关由两部分组成,一个是信令网关(cascade)（平台互联服务器？）,负责级联相关信令发送、接收和处理，一个是媒体网关(media),负责视频流的转发,媒体网关支持负载均衡,可多台分布式部署。 
+
+https://www.cnblogs.com/ywlaker/p/6113927.html		单点登录
+
+https://blog.csdn.net/bush_nanjing/article/details/65481412		mybatis利用generator自动生成的代码学习篇
+
+https://blog.csdn.net/jdsjlzx/article/details/70479227		Java中<? extends T>和<? super T>的理解
+
+https://www.cnblogs.com/GoForMyDream/p/5912737.html		JAVA读取Excel中内容（HSSF和Workbook两种方法）
+
+https://blog.csdn.net/xiaokang123456kao/article/details/62057979		Sping中的配置Bean详解
+
+quartz与spring集成：quartz是一个开源作业调度框架，用来根据时间间隔调度作业。
+		先创建一个job，必须继承QuartzJobBean或者实现Job方法。为了调度此job执行，需要先得到一个Schedule实例，然后创建一个包含任务信息的JobDetail，最后创建一个Trigger管理任务的执行。
+		https://blog.csdn.net/w405722907/article/details/72458059
+
+https://www.cnblogs.com/ygj0930/p/6543960.html				BIO、NIO和AIO的区别（简明版）
+
+https://blog.csdn.net/javazejian/article/details/72828483		深入理解Java并发之synchronized实现原理
+
+遇到问题：Idea打开不同项目，jdk不一致解决方案			https://blog.csdn.net/annan14112/article/details/79798956
+			address localhost:1099 isalready inuse		https://blog.csdn.net/zhang1027963459/article/details/50698995
+			
+curl:下载测试网页		https://www.cnblogs.com/duhuo/p/5695256.html
+
+1. @PathParam ，url中直接在斜杠后面添加参数值，              例如：www.a.com/student/001 ;
+
+2. @QueryParam ，url中在后面添加【键值对】形式的参数，例如：www.a.com/student?id=001 ;
+
+
+
+JPA:@Id
+	@Entity
+	@Column
+	序列生成主键：@GeneratedValue
+			  @SequenceGenerator(name = "g_security_factory_info", sequenceName = "s_security_factory_info", allocationSize = 1)
+
+swagger注释API详细说明		 https://blog.csdn.net/xupeng874395012/article/details/68946676
+
+聚集索引与非聚集索引		sql-索引的作用(超详细)		https://www.cnblogs.com/hyd1213126/p/5828937.html
+
+https://www.cnblogs.com/lwbqqyumidi/p/3804883.html		java多线程
+
+restTemplate		https://blog.csdn.net/itguangit/article/details/78825505
+
+https://blog.csdn.net/u010862794/article/details/73649616		feign基础教程
+
+@consumes指定发送请求的类型（string，json）
+@Produces指定返回数据的类型
+
+@PathParam获取url中参数
+@QueryParam获取get请求参数
+@FromParam获取post请求参数
+@BeanParam获取参数中的实体对象
+例如：
+@POST  
+@Consumes("application/x-www-form-urlencoded")  
+public void update(@BeanParam User user) {  
+    // Store the user data  
+}  
+
+
+
+kafaka:分布式发布订阅消息系统和一个强大的队列
+	消息保存在磁盘上，不基于jms
+	
+mq:基于jms的应用程序间的通讯框架，生产者消费者模式，可用于对消息实时性要求不高的场景。
+
+mina、netty：nio机制，高性能、高可靠性，对java socket的封装，提供了心跳包等功能。
+
+webservice:采用基于HTTP的SOAP协议传输数据（xml、xsd格式），面向对象远程调用技术，跨平台
+
+netstat -ano | findstr 8080
+
+dubbo:一款分布式服务框架;高性能和透明化的RPC远程服务调用方案;SOA服务治理方案
+
+zookeeper:分布式协调服务	服务注册与发现（dubbo推荐的服务注册中心），选举（Hadoop）
+
+https://www.cnblogs.com/zhaobingqing/p/6864223.html			SpringData系列四 @Query注解及@Modifying注解
+
+https://baijiahao.baidu.com/s?id=1601157416754874964&wfr=spider&for=pc		JAVA中新生代，老年代，永久代，元空间概述
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
