@@ -105,7 +105,17 @@ java自带序列化问题：默认的序列化格式将会体现类内部的格�
 
 对象数组：A[] aArray = new A[10];(动态)			A[] aArray = new A[]{new A(),new A(),...};(静态)
 			
+CAS：Compare-and-swap（比较与替换）的简写，是一种有名的无锁算法，乐观锁		从内存中取出值与期待的值比较，如果未被修改则替换。		eg:	AtomicInteger count = new AtomicInteger();	count.compareAndSet(2, 1)
 
+BlockingQueue: ArrayBlockingQueue,LinkedBlockingQueue
+
+CopyOnWrite：适合读多写少情况，写时复制加锁，读不加锁
+
+NIO之Buffer的clear()、rewind()、flip()方法的区别:clear()用于写模式，rewind()用于读写模式，flip()用于读模式
+
+阻塞与非阻塞VS同步与异步：
+IO过程主要分两个阶段：1.数据准备阶段	2.内核空间复制回用户进程缓冲区空间
+阻塞与非阻塞都是同步模型，非阻塞在数据准备阶段就返回，准备好后接收数据
 
 
 				
