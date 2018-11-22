@@ -23,12 +23,12 @@ public class Zuhe {
 		if (cur == a.length) {
 			return;
 		}
-    visited[cur] = true;
-    //处理在子串a[pos+1, n-1]中取出k-1个数的子问题
-    dfs(a, cur + 1, count + 1, k, visited);
-    //回溯
-    visited[cur] = false;
-    //处理在子串a[pos+1, n-1]中取出k个数的问题
+		visited[cur] = true;
+		//处理在子串a[pos+1, n-1]中取出k-1个数的子问题
+		dfs(a, cur + 1, count + 1, k, visited);
+		//回溯
+		visited[cur] = false;
+		//处理在子串a[pos+1, n-1]中取出k个数的问题
 		dfs(a, cur + 1, count, k, visited);
 	}
 	
