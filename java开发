@@ -1,0 +1,133 @@
+@Scheduled(cron = "0 0 1 * * ?")	定时任务
+
+URLDecoder & URLEncoder
+
+@Transactional：声明式事务
+
+@Id 标注用于声明一个实体类的属性映射为数据库的主键列。
+@GeneratedValue 用于标注主键的生成策略，通过strategy 属性指定。@GeneratedValue(strategy=GenerationType.AUTO)
+–IDENTITY：采用数据库ID自增长的方式来自增主键字段，Oracle 不支持这种方式； 
+–AUTO： JPA自动选择合适的策略，是默认选项； 
+–SEQUENCE：通过序列产生主键，通过@SequenceGenerator 注解指定序列名，MySql不支持这种方式 
+–TABLE：通过表产生主键，框架借由表模拟序列产生主键，使用该策略可以使应用更易于数据库移植。
+
+jpa分页查询：https://blog.csdn.net/Jae_Wang/article/details/80630776
+public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
+ 
+    // 根据openid来查询一条条的OrdeMaster以分页显示出来
+    Page<OrderMaster> findByBuyerOpenid(String buyerOpenid, Pageable pageable);
+}
+
+@Query注解的用法：https://www.cnblogs.com/zj0208/p/6008627.html
+
+@RequestParam和@PathVariable
+
+spring.profiles.active=dev		启用dev配置
+
+jackson:
+属性为null不参加序列化：
+1、在属性上加@JsonInclude(Include.NON_NULL) 
+2、代码中
+ObjectMapper mapper = new ObjectMapper();
+mapper.setSerializationInclusion(Include.NON_NULL);  
+//通过该方法对mapper对象进行设置，所有序列化的对象都将按改规则进行系列化 
+//Include.Include.ALWAYS 默认 
+//Include.NON_DEFAULT 属性为默认值不序列化 
+//Include.NON_EMPTY 属性为 空（“”） 或者为 NULL 都不序列化 
+//Include.NON_NULL 属性为NULL 不序列化 
+注意：只对VO起作用，Map List不起作用
+
+
+ClassLoader.getResourceAsStream() 加载配置文件资源
+
+IOUtils		BooleanUtil		StringUtil.defaultIfBlank		CSVFormat		CSVPrinter		FileWriterWithEncoding		CSVFormat
+
+gitlab ssh配置
+https://www.cnblogs.com/hafiz/p/8146324.html
+
+@Get
+@Path
+
+mybatis三种动态sql			https://www.cnblogs.com/guoyafenghome/p/9123442.html
+
+
+undertow		https://www.jianshu.com/p/e625b8aa0e80
+
+
+JAX-RS构建restful服务 https://www.cnblogs.com/zhangliwei/p/8284079.html		resteasy	https://www.cnblogs.com/langtianya/p/7624647.html
+
+oracle初始密码：
+system默认:manager
+sys默认:change_on_install
+使用SQL Plus登录数据库时，system使用密码manager可直接登录。
+但如果是sys用户，密码必须加上as sysdba，即完整密码为：change_on_install as sysdba
+
+oracle教程：https://www.cnblogs.com/linjiqin/archive/2012/01/31/2332616.html
+
+Map.getOrDefault method could be used to replace the code like this:
+      String val = map.containsKey(key) ? map.get(key) : "none";
+Map.computeIfAbsent method could be used to replace the code like this:
+      List<String> list = map.get(key);
+      if (list == null) {
+        list = new ArrayList<>();
+        map.put(key, list);
+      }
+eg:// java8之后。上面的操作可以简化为一行，若key对应的value为空，会将第二个参数的返回值存入并返回
+Object key2 = map.computeIfAbsent("key", k -> new Object());
+
+Map.putIfAbsent method could be used to replace the code like this:
+      String val = map.get(key);
+      if (val == null) map.put(key, newVal);
+Map.merge method could be used to replace the code like this:
+      Integer val = map.get(key);
+      if (val == null) map.put(key, 1);
+      else map.put(key, val + 1);
+
+
+git操作：
+查看分支git branch
+获取分支git fetch origin dev
+在本地创建分支dev并切换到该分支git checkout -b dev origin/dev
+把gitLab上dev分支上的内容都拉取到本地了git pull origin dev
+
+postgres:character varying（变长，有长度限制）、character、（定长，不足补空白）text（变长，无长度限制）
+序列对象（也叫序列生成器）就是用CREATE SEQUENCE 创建的特殊的单行表。一个序列对象通常用于为行或者表生成唯一的标识符。
+CREATE [ TEMPORARY | TEMP ] SEQUENCE name [ INCREMENT [ BY ] increment ]
+    [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
+    [ START [ WITH ] start ] [ CACHE cache ] [ [ NO ] CYCLE ]
+    [ OWNED BY { table.column | NONE } ]
+CREATE SEQUENCE S_SERVER
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 20;
+postgres序列：https://www.cnblogs.com/mchina/archive/2013/04/10/3012493.html
+	
+delete只删除表的数据，是DML语句，操作会放在rollback segement中，事务提交后才生效，可以出发trigger；drop和truncate是DDL语句，操作后即生效，drop删除表，truncate清空表
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
