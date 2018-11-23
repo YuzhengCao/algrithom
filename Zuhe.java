@@ -1,5 +1,8 @@
 package nowCoder;
 
+/*
+ *组合递归实现
+ */
 public class Zuhe {
 
 	public static void main(String[] args) {
