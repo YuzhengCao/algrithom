@@ -1,5 +1,8 @@
 package nowCoder;
 
+/*
+ *排列递归实现
+ */
 public class Pailie {
 
 	public static void main(String[] args) {
