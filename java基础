@@ -9,8 +9,6 @@ static:用在方法与变量上时，不声明为private时可以用类名直接
 			3.静态内部类可以单独初始化Inner i = new Outer.Inner();非静态内部类：先实例化外部类，再实例化内部类
 	   静态块：类加载时初始化一些参数，只执行一次
 
-新生代：
-
 nio:核心：channel & buffer、异步IO、selector	Mina是NIO
 		Channel既可以进行读，也可以进行写
 
@@ -76,7 +74,9 @@ java的8种数据类型：boolean(1),byte(8),char(16),short(16),int(32),long(64)
 	
 java线程池：
 
-jvm内存模型：
+jvm内存区域与GC机制：jvm内存区域分为堆、栈、方法区，堆分为年轻代、老年代，年轻代分为一个Eden区和两个survivor区，栈分为虚拟机栈、本地方法栈和程序计数器。
+堆和方法区为线程共享的，栈为线程私有的。GC机制：年轻代采用停止复制法，将Eden区和一个survivor区存活的对象复制到另一个survivor区。对于老年代对象引用新生代对象，Young GC时查询一个512byte的card table确认是否可以回收。
+老年代采用标记整理法，将存活的对象向一端移动。方法区的回收：常量没有引用就可被回收。类回收：类的所有实例都已经被回收，加载类的ClassLoader已经被回收，类对象的Class对象没有被引用（即没有通过反射引用该类的地方）
 
 方法重写应遵循“三同一小一大”原则：
 “三同”：即方法名相同，形参列表相同，返回值类型相同；
@@ -86,6 +86,10 @@ jvm内存模型：
 intValue()是把Integer对象类型变成int的基础数据类型； 
 parseInt()是把String 变成int的基础数据类型； 
 Valueof()是把String 转化成Integer对象类型；
+
+(String) 强转，必须是字符串类型，如果是Integer类型等其他，会抛出CalssCastException异常，object值可以为null
+toString()	调用object的toString方法，object不能为null
+String.valueOf	String类的静态方法，可以传null，但返回的是字符串的null
 
 JVM类加载机制： 加载	验证	准备	解析	初始化
 				启动类加载器(Bootstrap ClassLoader)：负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath参数指定路径中的，且被虚拟机认可（按文件名识别，如rt.jar）的类。
@@ -136,4 +140,4 @@ java对象数组中实际存的是对象的引用
 多态
 向上转型向下转型
 
-
+动态规划：最优子结构，边界，状态转移公式
