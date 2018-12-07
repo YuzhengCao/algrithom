@@ -106,16 +106,31 @@ postgres序列：https://www.cnblogs.com/mchina/archive/2013/04/10/3012493.html
 	
 delete只删除表的数据，是DML语句，操作会放在rollback segement中，事务提交后才生效，可以出发trigger；drop和truncate是DDL语句，操作后即生效，drop删除表，truncate清空表
 
+mybaits注解开发动态sql异常：Cause: org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 758; 元素内容必须由格式
+在注解字符串中，除where和if关键标签外，不能够使用<号，即小于符号，具体原因未明。建议将小于号改成大于号，字段调换一下位置即可。
 
+@Select("select * from user_information where user_alias like '%#{name}%')")
+由于模糊查询需要添加单独的   '    ' 导致占位符被当做字符串而没有被替换,会造成如下异常:
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: 
+常用解决方法是:数据库字符拼接	@Select("select * from user_information where user_alias like concat(concat('%',#{name}),'%')")
 
+oracle分页查询：
+SELECT * FROM  
+(  
+SELECT A.*, ROWNUM RN  
+FROM (SELECT * FROM TABLE_NAME) A  
+WHERE ROWNUM <= 40  
+)  
+WHERE RN >= 21  
 
+数组，List，Set相互转化
+https://blog.csdn.net/kye055947/article/details/80561633
 
+//导出csv加上UTF-8文件的标识字符      
+out.write(new   byte []{( byte ) 0xEF ,( byte ) 0xBB ,( byte ) 0xBF });
 
-
-
-
-
-
+装饰模式：抽象构件类，具体构件类，抽象装饰类，具体装饰类。装饰模式用于动态的为对象增加功能，装饰类与被装饰类不会相互耦合。
+现实中一般为半透明的装饰模式：具体装饰类的接口和构建类的接口不完全一致
 
 
 
