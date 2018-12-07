@@ -1,0 +1,793 @@
+
+1、有Java服务器端开发经验，有高并发开发服务经验，熟悉linux，熟练使用shell，python，熟悉tomcat及nginx；
+2、能够熟练Netty等高并发通信框架；
+3、能够熟练使用主流RPC技术：Thrift；
+4、能够熟练使用通用缓存技术：Redis、Memcache；
+5、能够熟练使用主流队列技术，包含：Kafka、RabbitMQ；
+6、能够熟练使用主流存储技术，包含：MySQL、Redis、MongoDB；
+7、能够熟练使用主流框架技术，包含：Spring；
+8、能够熟练使用阿里云服务，包含：EC2，OSS；
+9、熟悉其他诸如Dubbo、ActiveMQ、Redis、MongoDB、MQS、 SLS、ODPS、OAS，Couchbase、Cassandra、FastDFS、Axon（CQRS）等有加分。
+
+
+了解高并发、高性能的分布式系统的设计及应用、调优
+Servlet  jsp 还是要复习啊，都忘得差不多了
+jdbc statement
+
+常见的SQL注入攻击有哪些
+
+下面有关SPRING的事务传播特性，说法错误的是？
+ 
+PROPAGATION_SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行
+ 
+PROPAGATION_REQUIRED：支持当前事务，如果当前没有事务，就抛出异常
+ 
+PROPAGATION_REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起
+ 
+PROPAGATION_NESTED：支持当前事务，新增Savepoint点，与当前事务同步提交或回滚
+
+
+
+
+
+
+
+
+
+
+JVM内存模型
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+JDBC Statement
+1.Statement、PreparedStatement和CallableStatement都是接口(interface)。  
+2.Statement继承自Wrapper、PreparedStatement继承自Statement、CallableStatement继承自PreparedStatement。  
+3.  
+Statement接口提供了执行语句和获取结果的基本方法；  
+PreparedStatement接口添加了处理 IN 参数的方法；  
+CallableStatement接口添加了处理 OUT 参数的方法。  
+4.  
+a.Statement:  
+普通的不带参的查询SQL；支持批量更新,批量删除;  
+b.PreparedStatement:  
+可变参数的SQL,编译一次,执行多次,效率高;  
+安全性好，有效防止Sql注入等问题;  
+支持批量更新,批量删除;  
+c.CallableStatement:  
+继承自PreparedStatement,支持带参数的SQL操作;  
+支持调用存储过程,提供了对输出和输入/输出参数(INOUT)的支持;  
+
+Statement每次执行sql语句，数据库都要执行sql语句的编译 ，  
+最好用于仅执行一次查询并返回结果的情形，效率高于PreparedStatement。  
+
+PreparedStatement是预编译的，使用PreparedStatement有几个好处  
+1. 在执行可变参数的一条SQL时，PreparedStatement比Statement的效率高，因为DBMS预编译一条SQL当然会比多次编译一条SQL的效率要高。  
+2. 安全性好，有效防止Sql注入等问题。  
+3.  对于多次重复执行的语句，使用PreparedStament效率会更高一点，并且在这种情况下也比较适合使用batch；  
+4.  代码的可读性和可维护性。
+
+类加载机制
+序列化与反序列化
+FastJSON
+private static final long serialVersionUID = 1L;
+驱动加载
+Jdbc的过程
+Servlet
+Jsp
+Jstl
+Spring
+Struts
+面向切面编程
+
+
+1.	HTTP请求包括什么内容？
+请求头，请求行，请求体
+2.B/S模式和C/S模式的特点和区别（胖客户端，瘦客户端，考虑平台，成本）
+3.CGI和servlet的区别
+CGI：
+通用网关界面，它是运行在web服务器上的一个程序，由来自用户的输入触发。
+优点：可以用各种语言编写，实现相对容易
+缺点：每个单元都是重量级的，每个请求都要启动一个新的进程。
+不可伸缩，CGI处理代码和HTML混合在一起，不一定面向对象
+Servlet：
+优点： 线程 可伸缩 强健
+缺点：处理代码和html混合在一起
+4.	GET和POST的区别
+5.	Servlet生命周期
+Servlet的生命周期分为5个阶段：加载、创建、初始化、处理客户请求、卸载。
+(1)加载：容器通过类加载器使用servlet类对应的文件加载servlet
+(2)创建：通过调用servlet构造函数创建一个servlet对象
+(3)初始化：调用init方法初始化
+(4)处理客户请求：每当有一个客户请求，容器会创建一个线程来处理客户请求
+(5)卸载：调用destroy方法让servlet自己释放其占用的资源
+
+创建Servlet的实例是由Servlet容器来完成的，且创建Servlet实例是在初始化方法init()之前
+
+创建一次 单例模式  同一个servlet
+销毁   伴随着服务器的关闭而消失
+Services分发服务
+
+初始化参数  web.xml可以放置初始化参数
+
+ServletContext对象约等于整个web应用
+web应用中的servlet之间的资源共享   不安全(一般是读)
+
+context.getAttritubte() 是Object类型
+6.为什么要有session
+在服务器端用来存储特定客户端的状态（数据）的机制叫会话，叫session
+身份验证和权限认证
+Session不会跨web应用
+JsessionID
+
+7.Cookie
+在客户端，在响应中发出，有生命周期，过期有刘浏览器删除
+
+
+
+
+
+
+
+
+
+doget/dopost与Http协议有关，是在 javax.servlet.http.HttpServlet 中实现的
+GenericServlet 抽象类 给出了设计 servlet 的一些骨架，定义了 servlet 生命周期，还有一些得到名字、配置、初始化参数的方法，其设计的是和应用层协议无关的
+ 
+
+servlet在多线程下其本身并不是线程安全的。
+如果在类中定义成员变量，而在service中根据不同的线程对该成员变量进行更改，那么在并发的时候就会引起错误。最好是在方法中，定义局部变量，而不是类变量或者对象的成员变量。由于方法中的局部变量是在栈中，彼此各自都拥有独立的运行空间而不会互相干扰，因此才做到线程安全。
+
+_jspService()的九个内置对象
+Page 相当于this、
+Request  response
+Session
+Application
+
+Out 
+Exception
+Config
+Pagecontext
+
+
+forward和redirect是最常问的两个问题
+forward，服务器获取跳转页面内容传给用户，用户地址栏不变
+redirect，是服务器向用户发送转向的地址，redirect后地址栏变成新的地址
+
+静态引入和动态引入
+
+Requestdispatch
+分发器:内部流转
+重定向  参数是否可知
+
+parameter是string类型
+attribute是Object类型
+
+Parameter是客户端来的，只能取
+Attribute是web组件来设置和获取的
+
+加载驱动方法
+1.Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+2. DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+3.System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
+
+
+Page指令
+<%@  page import=”java.util.*”  %>
+
+Iserrorpage
+Errorpage
+Charset
+pageencoding
+
+
+Include指令
+
+过桥问题
+数字问题
+内部类
+
+Context上下文  就是这web应用
+URI:从web应用开始
+URL：全
+ServletPath:就是servlet-pattern中的值
+
+
+
+
+
+
+
+悲观锁（Pessimistic Lock）： 
+每次获取数据的时候，都会担心数据被修改，所以每次获取数据的时候都会进行加锁，确保在自己使用的过程中数据不会被别人修改，使用完成后进行数据解锁。由于数据进行加锁，期间对该数据进行读写的其他线程都会进行等待。
+
+乐观锁（Optimistic Lock）： 
+每次获取数据的时候，都不会担心数据被修改，所以每次获取数据的时候都不会进行加锁，但是在更新数据的时候需要判断该数据是否被别人修改过。如果数据被其他线程修改，则不进行数据更新，如果数据没有被其他线程修改，则进行数据更新。由于数据没有进行加锁，期间该数据可以被其他线程进行读写操作。
+
+悲观锁：
+比较适合写入操作比较频繁的场景，如果出现大量的读取操作，每次读取的时候都会进行加锁，这样会增加大量的锁的开销，降低了系统的吞吐量。
+乐观锁：
+比较适合读取操作比较频繁的场景，如果出现大量的写入操作，数据发生冲突的可能性就会增大，为了保证数据的一致性，应用层需要不断的重新获取数据，这样会增加大量的查询操作，降低了系统的吞吐量。
+
+总结：两种所各有优缺点，读取频繁使用乐观锁，写入频繁使用悲观锁。
+
+
+Druid
+模板引擎
+ORM
+https://blog.csdn.net/xhjcehust/article/details/76362429
+ActiveRecord
+action 请求
+Struts2
+Handler
+回调方法
+前端渲染与后端渲染
+https://www.manster.me/?p=473
+Velocity
+AOP
+IOC 依赖注入
+AOP的原理就是java的动态代理机制
+过滤器，监听器，拦截器
+Phantom（幻影）
+Alchemy（魔力）
+热加载，热部署
+Ret工具类
+Java的序列化
+
+动态链接与动态加载
+类加载的声明周期：
+加载 验证 准备 解析 初始化 使用 卸载
+其中验证 准备 解析统称为连接
+
+静态代码块和构造函数的执行顺序？
+初始化
+被动引用：不会初始化
+1.	通过子类引用父类的静态字段，不会导致子类初始化。对于静态字段，只有直接定义这个字段的类才会被初始化。
+2.	通过数组定义来引用类，不会触发此类的初始化。
+3.	常量在编译阶段会存入调用类的常量池中，本质上并没有直接引用到定义常量的类，因此不会触发定义常量类的初始化。
+
+类加载器：通过一个类的全限定名来获取此类的二进制字节流  此动作放到java虚拟机外部实现。实现这个动作的代码模块称为“类加载器”。
+双亲委派模型
+破坏双亲委派模型：SPI服务如JNDI,JDBC
+
+加载：通过一个类的全限定名来获取此类的二进制字节码文件。将字节码所代表的静态存储结构·转化为方法区的运行时结构。
+验证：文件格式验证  元数据验证 字节码验证  符号引用（常量池匹配校验）
+准备：类变量分配内存并设置初始值，在方法区进行分配
+解析：虚拟机将常量池内的符号引用替换为直接引用的过程。
+初始化：
+使用：
+卸载：
+
+数据库
+锁的概念
+高并发访问如何保证数据的一致性？
+SQL注入，常见的SQL注入
+Python多线程爬虫  
+反反爬虫
+xpath  知识图谱
+K-means算法
+Ajax
+
+中文正则匹配
+圈复杂度
+
+事务：ACID
+原子性，一致性，隔离性，持久性
+输出处理：幻象读，不可重复读，脏读
+Oracle只有read committed 和serialable
+约束级别
+Immediately :完整性约束会在整个SQL语句 得到处理之后立即检查
+DEFERRABLE约束模式和级联更新 采用DEFERRABLE约束模式我们能够延迟约 束的检查到引用请求或发出COMMIT时。
+
+锁升级
+
+SIX锁
+共享锁
+排他锁
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Java 基础知识
+
+1如何获取Class对象？
+Test t=new Test();
+（1）调用对象的getClass()方法，如Class c=t.getClass()
+（2）对用Class.forName( )方法，参数为类的全名（包名.类名）
+（3）使用.class语法来获得Class对象，就是调用类的.class来获取Class对象 ,如Class c=Test.class;
+
+2.	接口中所有成员的方法都是public，abstract的，也可以不加修饰
+被abstract修饰的方法没有方法体
+String类的length()方法，数组有length属性
+类可以被private(内部类)，public，protected修饰
+3.	重载与重写（覆盖）的区别
+
+访问修饰符的权限
+默认访问修饰符为包权限，只允许类内和同包类能访问
+Protected 同包类，不同包中子类
+
+4.	继承中的构造方法
+构造方法不能被继承 
+1、子类的构造过程中必须调用其基类的构造方法。
+2、子类可以在自己的构造方法中使用super(argument_list）调用基类的构造方法。
+  　　2.1、使用this(argument_list)调用本类的另外构造方法。
+　　  2.2、如果调用super，必须写在子类构造方法的第一行。
+3、如果子类的构造方法中没有显示的调用基类的构造方法，则系统默认调用基类的无参数构造方法。
+4、如果子类构造方法中既没有显示调用基类构造方法，而基类又没有无参数的构造方法，则编译出错。
+构造方法可以被public，private（单例模式），protected（包权限）修饰
+
+只有与文件名相同的类中main（）方法才能作为整个程序的入口方法。否则报运行错误。
+
+5.	编译错误和运行错误
+编译错误：一般是语法有问题，程序在编译时就产生错误。不能编译成.class文件，比如包名或内部类名写错等等。   
+运行错误：就是程序通过编译，在运行时出错，一般是逻辑上的问题，如数组超界、空指针等。
+编译错误：
+1.有初始化列表不能指定长度
+FALSE：int[] a1 = new int[6] {1,2,3,4,5,6}; 
+TRUE：int[] a1 = new int[] {1,2,3,4,5,6};
+运行错误：
+类型强制转换异常：ClassCastException
+空指针异常类：NullPointerException  
+数组下标越界异常：ArrayIndexOutOfBoundsException  
+输入输出异常：IOException  
+
+6.	final finally finalize的区别
+final:
+用于声明属性，方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。JDK中如String，StringBuffer等都不可继承。
+final属性:由于不可变有引用不可变和对象不可变两种，final指引用不可变。即只能指向初始化指向的那个对象，而不关心对象内容的变化。所以被final修饰的变量必须被初始化。
+final参数：用来表示这个参数在这个方法内部不允许被修改。
+finally: 
+异常处理语句结构的一部分，表示总是执行。
+finalize：
+Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，供垃圾收集时的其他资源回收，例如关闭文件等。需要注意的是，一旦垃圾回收器准备好释放对象的空间，将首先调用其finalize( )方法，并在下一次垃圾回收动作发生时，才会真正回收对象占用的内存。
+
+7.	Thread类
+线程的核心逻辑在run( )方法中（Thread类的run方法的方法体为空）。start( )方法调用来实现多线程的功能。
+如果直接调用run( )方法，就与调用普通的方法类似。
+
+8.	String StringBuffer,StringBuilder的区别
+String s="abce"是一种非常特殊的形式,和new 有本质的区别。它是java中唯一不需要new 就可以产生对象的途径，放在常量池中
+String是不可变量（一旦赋值，内容不能更改）享元模式 适合在需要被共享的场合使用。
+StringBuffer和StringBuilder是可变量，有append和insert方法
+StringBuilder的速度比StringBuffer要快
+StringBuilder（非线程安全）,适合单线程
+StringBuffer（线程安全），适合多线程
+在大部分情况下 StringBuilder > StringBuffer
+
+9.	==和equals()的区别
+== 比较的是变量(栈)内存中存放的对象的(堆)内存地址，用来判断两个对象的地址是否相同，即是否是指相同一个对象。比较的是真正意义上的指针操作。进行比较的对象必须是类型相同的，否则编译报错。
+equals用来比较的是两个对象的内容是否相等，由于所有的类都是继承自java.lang.Object类的，所以适用于所有对象，如果没有对该方法进行覆盖的话，调用的仍然是Object类中的方法，而Object中的equals方法返回的却是==的判断。
+String、Integer等类）对equals进行了重写
+Integer类的equals方法描述为：只有当参数不为null且参数为Integer类型且有相同的int值的时候才返回true。Double，Long等equals方法类似。
+10.	集合框架
+Collection接口
+List接口  ArrayList LinkedList Vector
+Set接口  HashSet TreeSet
+Map接口  HashMap TreeMap  HashTable
+只有Vector和HashTable是线程安全的
+TreeSet和TreeMap是有序的
+类的初始化顺序和变量的初始化顺序
+类的初始化：
+（静态变量、静态初始化块）>（变量、初始化块）>构造器（构造函数）
+•	静态初始化块,执行优先级高于非静态的初始化块，它会在对象装载到 jvm的时候执行一次，执行完成便销毁，只能初始化 static 修饰的变量
+•	非静态初始化块，执行的时候如果有静态初始化块，先执行静态初始化块再执行非静态初始化块，在每个对象生成时都会被执行一次，它可以初始化类的实例变量。但它会在构造函数执行之前被执行。
+变量的初始化:
+成员变量(包括静态变量？？)提供默认初始化，局部变量不会提供默认的初始化
+1. 类变量和实例变量
+类变量即类成员变量中的静态变量，它们可以通过类名来直接访问。
+实例变量是类成员变量中的非静态变量，只有在实例化对象之后通过对象来访问。
+2. 空间分配的时间不同
+类变量是在类加载后的准备阶段在方法区分配内存的。
+实例变量是在类实例化为对象的时候在堆中分配内存。
+3. 初始化
+类变量在准备阶段会进行默认初始化，当某些条件满足时候会触发类的初始化。详见《深入理解java虚拟机》的类加载机制。
+实例变量在空间分配内存后，虚拟机会将所分配到的内存空间都初始化为零值（不包括对象头）。这一步操作保证了对象的实例字段在java代码中可以不赋初值就可以直接访问，程序能访问到这些字段的数据类型所对应的零值。
+对于局部变量，只能显示地进行初始化，否则不能访问该变量的值。
+4. final关键字
+当final关键字作用于类变量时，必须有显示的初始化。在声名对象的语句中初始化，或者在静态代码块中进行初始化。
+当final关键字作用于实例变量时，也必须进行显示的初始化。在声名对象的语句中初始化，或者在构造代码块中进行初始化，或者在所有的构造函数中进行初始化。
+final修饰的变量只能初始化化一次，因此该变量已经在一种方式中进行过初始化，则不能在另一种方式再进行一次初始化。
+
+Object中的常见方法
+HashCode();wait();notify();equals();getClass();toString();clone();finalize();
+clone()：：clone函数返回的是一个引用，指向的是新的clone出来的对象，此对象与原对象分别占用不同的堆空间。
+getClass():返回此Object的运行时类
+HashCode():返回该对象的哈希码值
+Notify():唤醒在此对象监视器上等待的单个线程
+toString():返回该对象的字符串表示
+Equals():判断两个对象是否相等
+
+所有基本类型的包装类都是不可变类，String类也是
+
+形参是实参的副本，在方法调用的时候，对形参应用所指对象属性值的修改对实参可见，对引用值本身的修改对实参不可见。
+
+各占多少位？
+基本数据类型（按值传递）：
+字符类型：char
+浮点型：double,float 
+布尔类型：boolean
+数值类型：byte,short,int,long
+
+Transient
+
+序列化的用途：
+（1）将对象的字节序列永久的保存到硬盘上，通常放在一个文件中
+（2）在网络上传输对象的字节序列
+
+
+在java语言编程中，有时为了提高程序的运行效率，编译器会做一些优化操作，把经常被访问的变量缓存起来，程序在读取这个变量的时候有可能会直接从寄存器中读取这个值，而不会从内存中读取。但遇到多线程编程时，变量的值可能被其他线程修改了，而该缓存的值还没有变化，从而造成程序读取的值和实际变量的值不一致。关键字volatile能解决这一问题。被关键字volatile修饰的变量编译器不会做优化，每次都从内存中读取。
+
+一个文件可以有多个类存在，只有被public修饰的类名必须与文件的名字相同，其他类名字没有要求。
+
+标识符命名
+只能由数字，字母，_和$组成且首字母不能数字
+
+接口中的成员变量默认都是public static final的 
+方法都是public abstract的
+
+不能通过方法的访问权限，返回值类型和抛出的异常类型来进行重载。
+
+JAVA中的深拷贝与浅拷贝
+常见设计模式的类图
+
+Sleep( )和wait( )的区别
+Sleep是使线程暂停执行一段时间
+sleep()是属于Thread类中的。wait()方法，则是属于Object类中的。
+sleep()方法导致了程序暂停执行指定的时间，让出cpu该其他线程，但是他的监控状态依然保持，当指定的时间到了又会自动恢复到可运行状态。
+在调用sleep()方法的过程中，线程不会释放对象锁，当调用wait()方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象调用notify()方法后本线程才进入对象锁定池准备
+1. 线程的挂起和唤醒
+      挂起实际上是让线程进入“非可执行”状态下，在这个状态下CPU不会分给线程时间片，进入这个状态可以用来暂停一个线程的运行；在线程挂起后，可以通过重新唤醒线程来使之恢复运行。
+
+挂起的原因可能是如下几种情况：
+     （1）通过调用sleep()方法使线程进入休眠状态，线程在指定时间内不会运行。
+     （2）通过调用join()方法使线程挂起，使自己等待另一个线程的结果，直到另一个线程执行完毕为止。
+     （3）通过调用wait()方法使线程挂起，直到线程得到了notify()和notifyAll()消息，线程才会进入“可执行”状态。
+     （4）使用suspend挂起线程后，可以通过resume方法唤醒线程。
+      虽然suspend和resume可以很方便地使线程挂起和唤醒，但由于使用这两个方法可能会造成死锁，因此，这两个方法被标识为 deprecated（抗议）标记，这表明在以后的jdk版本中这两个方法可能被删除，所以尽量不要使用这两个方法来操作线程。
+
+      调用sleep()、yield()、suspend()的时候并没有被释放锁
+      调用wait()的时候释放当前对象的锁
+
+      wait()方法表示，放弃当前对资源的占有权，一直等到有线程通知，才会运行后面的代码。
+      notify()方法表示，当前的线程已经放弃对资源的占有，通知等待的线程来获得对资源的占有权，但是只有一个线程能够从wait状态中恢复，然后继续运行wait()后面的语句。
+      notifyAll()方法表示，当前的线程已经放弃对资源的占有，通知所有的等待线程从wait()方法后的语句开始运行。 
+ 
+
+Java中的多线程是一种抢占式的机制，而不是分时机制。抢占式的机制是有多个线程处于可运行状态，但是只有一个线程在运行。 
+共同点： 
+1. 他们都是在多线程的环境下，都可以在程序的调用处阻塞指定的毫秒数，并返回。 
+2. wait()和sleep()都可以通过interrupt()方法 打断线程的暂停状态 ，从而使线程立刻抛出InterruptedException。 
+如 果线程A希望立即结束线程B，则可以对线程B对应的Thread实例调用interrupt方法。如果此刻线程B正在wait/sleep/join，则 线程B会立刻抛出InterruptedException，在catch() {} 中直接return即可安全地结束线程。 
+需要注意的 是，InterruptedException是线程自己从内部抛出的，并不是interrupt()方法抛出的。对某一线程调用 interrupt()时，如果该线程正在执行普通的代码，那么该线程根本就不会抛出InterruptedException。但是，一旦该线程进入到 wait()/sleep()/join()后，就会立刻抛出InterruptedException 。
+不同点： 
+1.Thread类的方法：sleep(),yield()等 
+Object的方法：wait()和notify()等 
+2.每个对象都有一个锁来控制同步访问。Synchronized关键字可以和对象的锁交互，来实现线程的同步。 
+sleep方法没有释放锁，而wait方法释放了锁，使得其他线程可以使用同步控制块或者方法。 
+3.wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用 
+4.sleep必须捕获异常，而wait，notify和notifyAll不需要捕获异常
+Suspend方法就是将一个线程挂起（暂停），并且不会自动恢复，必须通过调用对用的resume方法，才能使线程重新进入可执行状态。
+
+释放掉占据的内存空间是由GC完成的，程序员无法直接强制释放内存空间，当一个对象不被使用的时候，GC会将其标记为垃圾，会在后面一个不确定的时间内回收垃圾。调用System.gc()方法通知垃圾回收器运行，JVM不能保证垃圾回收器马上运行。
+Jsp内置对象：page   request  session  application
+              PageContext  response  exception  config   out
+向数据库中增加一列的SQL语法是：
+alter table table_name add column column_name datatype
+问答题
+1.	接口和抽象类有什么区别？
+2.	实现多线程的方法有哪几种？
+
+编程题
+1.	.利用递归求6！
+
+Spring框架
+依赖注入
+
+HaspMap和HashTable的比较
+1.	都实现了map接口，HaspMap允许空键值，但最多只允许一条记录的键为null。HaspTable不允许键值为空。
+2.	HashMap把HashTable的contains（）方法去掉了，改为containsvalue和containsKey。因为contains方法容易产生误解。
+3.	HashTable继承自Dictionary类，而HashMap继承自AbstractMap类。
+4.	HashTable是线程安全的，而HashMap不会线程安全的。效率上一般HashMap要高些。
+5.	快速失败也就是fail-fast,它是java集合的一种错误检测机制。当多个线程对集合进行结构上的改变操作时，就可能会产生fail-fast事件。如A遍历的时候B进行了修改。会抛出ConcurrentModifycationException。
+HashTable是线程安全的，没有采用快速失败机制。
+Iterator支持从源集合中安全的删除对象，删除的方法为在Iterator上调用remove（）方法。这样做可以避免ConcurrentModifycationException。
+Iterator的remove是个安全的做法。
+https://www.cnblogs.com/devinzhang/archive/2012/01/13/2321481.html
+HashTable使用Enumeration进行遍历，HashMap使用Iterator进行遍历，
+HashTable默认大小为11，old*2+1,HashMap默认大小为16，而且一定是2的倍数。
+
+HashMap里面的键值对在取出的时候没有固定的顺序，是随机的。TreeMap实现了SortedMap接口，能够把保存的记录根据键值排序。LinkedHashMap是HashMap的一个子类，如果需要输出的顺序和输入的相同，需要LinkedHashMap，他还可以按照读取顺序进行排列。
+哈希值的使用不同，HashTable直接使用对象的hashCode。而HashMap重新计算hash值
+扩容机制不一样
+
+
+
+快速排序的两种分割策略
+双向链表的插入操作
+中断源一般可分为两类，强迫性中断和自愿性中断。强迫性中断由随机事件引起而非程序员安排，它包括输入输出中断，硬件故障中断，时钟中断，控制台中断和程序性中断。时间片到时属于自愿性中断。
+
+死锁条件
+不发生死锁的条件
+
+网关是局域网连接广域网的出口。
+
+A类IP: 1字节的网络地址+3字节的主机地址
+网络地址的最高位必须是0，地址范围为128.0.0.0
+B类IP:
+C类IP:
+D类IP:
+E类IP:
+
+
+ARP
+RARP
+派生类的覆盖方法必须要和基类被覆盖方法有相同的函数名和参数，返回值相同。子类方法不能缩小父类方法的访问权限，不能抛出比父类方法更多的异常。
+被public修饰的类和接口名字必须和文件名相同。
+
+
+位运算符&  <<  >>  <<<
+
+成员变量不能用static修饰
+
+Servlet的工作方式
+1.	用户来向servlet发出请求
+2.	Web服务器收到该请求后，把该请求提交给相应的容器处理。容器发现是对servlet的请求后，容器会创建HttpServletRequest和HttpServletResponse两个对象
+3.	容器把请求消息中的url信息找到对应的servlet，然后针对该请求创建一个单独的线程，同时把2中创建的对象以参数的形式传递到线程中。
+4.	容器调用servlet的service方法来完成对用户请求的响应。容器将相应消息返回给客户端。同时删除之前创建的两个对象HttpServletRequest和HttpServletResponse。
+
+
+Jdbc
+1.	加载jdbc驱动，并将其注册到DriverManger中。一般使用反射Class.forName(String driverName)
+2.	建立数据库连接，获得Connection对象。一般通过DriverManger.getConnection(url,username,password)实现
+3.	建立Statement或PrepareedStatement
+4.	通过Statement来执行SQL语句。
+5.	访问结果集对象ResultSet
+6.	释放相应资源
+
+Throwable对象
+             Error                     Exception
+Checked Exception      Runtime Exception
+
+Error属于JVM的严重错误，导致程序终止运行
+
+检查异常是在程序中最常碰见的异常。比如最常见的IO异常和SQL异常。这种异常都发生在编译阶段，java编译器强制程序去捕获此类型的异常。
+  异常的发生不会导致程序出错，进行处理后进行后续操作。
+  程序依赖于不可靠的外部条件，如系统IO
+
+运行时异常，编译器没有强制捕获并处理。出现这种异常时会由JVM处理。常见的运行时异常：NullPointerException（空指针异常）
+ArrayStoreException（数组存储异常）
+ClassCastException（类型转换异常）
+IndexOutOfBoundException（数组越界异常）
+BufferOverflowException（缓冲区溢出异常）
+ArithmeticException（算数异常）                               
+
+若是多线程由Thread.run( )抛出。
+
+
+引用和指针不能完全等同。
+
+位运算
+& 与运算   全1为1，否则为0
+
+类型转换
+
+低级向高级转换  自动类型转换
+Char类型会直接转换为对用的ASCII码
+Byte,char,short参与运算时，会自动转换为int,但当使用+=时，不会有类型转换。
+
+强制类型转换  高级到低级   会有精度的丢失
+3.9转int 为3
+
+HttpServletResponse接口提供了重写URL的方法
+public  java.lang.String encodeURL( java.lang.String  url ) 
+首先判断当前的web组件是否启用了session。如果没有启用直接返回参数url。再判断客户端浏览器是否支持cookie，如果支持cookie，则直接返回参数url，如果不支持cookie，就在参数url中加入sessionID信息，然后返回修改的url。
+此方法可以将sessionID加入到url中
+
+带有标识的break语句可以跳出多重循环
+
+JSP共有6个操作指令：jsp：include·
+jsp：useBean   jsp:forwardn   jsp:settProperty      jsp:getProperty  jsp:plugin
+
+可变参数   ...
+1.	只能作为最后一个参数出现
+2.	类型和变量名之间
+3.	编译器隐含创建一个数组’ 
+
+
+序列化：序列化是一种将对象转换成字节序列的过程，用于解决在对对象流进行读写操作时所引发的问题。序列化可以将对象的状态写在流里进行网络传输，或者保存到文件，数据库系统里，并在需要的时候把该流读取出来重新构造一个相同的对象。
+如何实现序列化？实现Serializable接口。该接口位于java.lang包中，里面没有任何方法。使用一个输出流例如FileOutputStream来构造一个ObjectOutputStream（对象流）对象，紧接着使用该对象的writeObject(Object obj)就可以将obj对象写出，要恢复的时候使用其对应的输入流。
+
+若一类能被序列化，其子类也能被序列化
+由于static代表类的成员，transient（声明实例变量，当对象存储时，它的值不需要维持）代表对象的临时数据，因此这两种数据成员不能被序列化。
+子类实现类Serializable接口，父类没有，父类中的属性不能被序列化，但子类中的属性仍能正确序列化。
+
+Throwable类实现了Serializable接口
+volatile是不能保证线程安全的
+
+java多态
+重载：编译时多态
+覆盖：通过方法覆盖实现的多态也可以被称为运行是多态（动态绑定）
+
+Java流知识
+https://www.cnblogs.com/xdp-gacl/p/3634409.html
+
+P60页第10题有问题
+P80  11题
+
+ 抽象类是可以继承实体类，但前提是实体类必须有明确的构造函数
+
+
+1.	接口和抽象类的区别
+包含一个过多个抽象方法的类是抽象类。
+抽象类的子类为父类的所有抽象方法提供实现，否则他们也是抽象类。
+
+接口(interface)就是一个方法的集合，可以通过接口来间接地实现多继承。接口中的变量都是public static final类型的。
+
+接口只有定义没有实现。抽象类可以有定义与实现。
+抽象类单继承。接口多继承。
+接口强调特定功能的实现，是has-a的设计理念。抽象类强调所属关系，是is-a。
+接口实现比较常见的功能，便于日后维护或添加方法。抽象类不适用于日后重新修改代码。
+
+如果子类是非抽象类，则必须实现接口中的所有方法； 
+如果子类是抽象类，则可以不实现接口中的所有方法，因为抽象类中允许有抽象方法的存在！
+
+2.实现多线程的方法有哪几种？
+（1）实现Runnable接口，并实现其中的run（）方法
+MyThread  mt=new MyThread();
+Thread t=new Thread(mt);
+t.start();
+（2）继承Thread类，重写run( )方法
+    MyThread mt=new MyThread();
+mt.start();
+（3）实现Callable接口，重写call（）方法
+Callable接口实际上是Executor框架中的功能类。
+
+3.List<? extends T>和 List<? super T>之间的区别
+<? extends T>表示类型上界。参数化的类型可能是T或者T的子类。是用来读数据的泛型。
+以下都是正确的：
+List<? extends Number>  list=new ArrayLIst<Number>();
+List<? extends Number>  list=new ArrayLIst<Integer>();
+List<? extends Number>  list=new ArrayLIst<Float>();
+
+<? super T>表示类型下界。参数化的类型是此类型的父类。是用来写数据的泛型。
+以下都是正确的：
+List<? super Float>  list=new ArrayLIst<Float>();
+List<? super Float>  list=new ArrayLIst<Number>();
+List<? super Float>  list=new ArrayLIst<Object>();
+
+Public static <T> void copy(List<? super T> dest, List<? extends T>src){
+         for(int i=0;i<src.size();i++){
+            dest.set(i,src.get(i));
+}
+}
+
+
+4.	ArrayList，Vector和LinkedList有什么特点？
+ArrayList和Vector都是基于存储元素的Object[]  array 实现的.内存连续，访问（索引）方便，插入（需要移动）不便。Vector扩充为原来2倍，ArrayList扩充为1.5倍
+Vector是线程同步的。
+LinkedList采用双向列表来实现，随机访问效率低，但插入元素时效率高。不是线程安全的。
+
+
+
+&&还具有短路的功能。
+
+Collection和Collections有什么区别？
+Collection是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。该接口的设计目标是为各种具体的集合提供最大化的统一操作方式。
+Collections是针对集合类的一个包装类，它提供了一些列静态方法实现对各种集合的搜索，排序以及线程安全化操作，其中的大多数方法都是用于处理线性表。Collections类不能实例化，如同一个工具类，服务于Collection框架。如：Collections.sort(list);
+
+什么是设计模式？常见的设计模式？
+设计模式是一套被反复使用的代码经验的总结。代码重用，便于修改。
+工厂模式  合成模式  观察者模式  享元模式  单例模式  适配器模式
+
+请简要介绍下SpringMVC，IOC以及AOP  P153页
+
+static方法不能使用this和super关键字，不能调用非静态方法，也不能访问非静态变量。
+
+
+JSP和Servlet的联系与区别
+JSP可以看做是特殊的servlet，他只不过是对Servlet的扩展。JSP页面最终要被转换为Servlet来运行。
+Servlet的实现方式是在代码中嵌入HTML代码，编写和修改都非常不便，所以比较适合流程控制和业务逻辑。JSP实现方式是在HTML中嵌入JAVA代码，比较适合页面的展示。
+Servlet没有内置对象。
+
+switch(expr)中expr可以是什么类型的？
+int,   byte,short,char(可以隐式的转换为int) 以及他们对应的包装类（底层自动拆箱） 
+枚举类（ordinal方法）
+JAVA 7中支持String类型(hashCode方法)
+本质都是int
+
+
+Java8的新特性
+
+
+
+
+
+
+
+
+多线程同步有哪几种方法？
+（1）synchronized关键字
+Java中每个对象都有一个对象锁与之关联，该锁表示对象在任何时候只允许被一个线程锁拥有。当一个线程调用对象的一段synchronizd代码时，首先要获取这个锁，然后执行相应的代码，执行结束后释放锁。但会影响程序效率。
+   public synchronized void copy();
+   synchronized块 可以指定上锁的对象
+（2）wait与notify
+（3）Lock
+   Lock接口以及其实现类ReentrantLock（重入锁）
+   lock( )：以阻塞的方式获取锁
+   tryLock()：以非阻塞的方式获取锁，可以有参数指定等待时间
+   lockInterruptibly():当前线程被其他线程中断会收到InterruptedException。
+lock( )方法不会抛出异常。
+
+Redirect和forward的区别
+Forward是服务器内部的重定向，服务器直接访问目标地址的url，把响应内容读取过来，客户端不知道，url地址栏不会变。由于在整个定向过程中用的是同一个Request,因此forward会将Request信息带到被定向的jsp或Servlet中。
+Redirect是客户端重定向，是完全的跳转（重新发送请求）,浏览器地址栏会变。
+
+Servlet与CGI的区别
+Servlet执行效率高。CGI对每个请求创建一个进程来处理，而Servlet创建一个线程
+Servlet移植性好。（JAVA）
+Servlet功能强大。CGI无法与服务器直接交互。
+
+Concurrent容器
+线程池
+反射内省
+
+当finally语句中有return语句时，将会覆盖函数中其他return语句。return在返回值时不是直接返回变量的值，而是复制一份，然后返回。对应基本数据类型，finally块中改变return的值对返回值没有任何影响。对于引用类型的数据，就有影响。就算catch块中有return语句，finally块语句任然会执行，当有异常发生后，catch，finally后程序就结束了。Finally后还有语句也不执行了。
+
+
+描述java类加载器的原理及其组织结构
+类的装载方式分为隐式装载和显示装载两种。隐式装载指的是程序在使用new等方式创建对象时会隐式的调用类的加载器将对应的类加载到JVM中。显式装载指的是通过直接调用Class.forName()方法将所需要的类加载到JVM。
+
+类的加载是动态的，他不会一次性加载所有的类到jvm后再运行。而是保证程序的基础类（例如基类）完全加载到JVM中，至于其他类，则在需要的时候加载。
+系统类（BootStrap,启动类加载器），扩展类，自定义类分别对应各自类加载器。通过双亲委托的方式进行加载。当有类要加载时，类加载器会请求弗雷加载器来完成这个工作，父类加载器会继续向上抛。当父类加载器搜索要加载的类，如果搜索不到才会由子类加载器来加载。
+
+加载执行顺序：
+1.静态变量，静态代码块（先父类后子类）
+2.非静态变量，非静态代码块，构造函数（先父类后子类）
+
+获取类名的方法：getClass().getName(); 
+getClass()方法在Object被定义为final与native,子类不能覆盖其方法。因此this.getClass().getName(); 和super.getClass().getName(); 调用的都是Object的getClass方法，此方法返回Object的运行时类。
+在子类中获取父类的名字：使用getClass().getSuperClass().getName()来获取
+
+ Fail-fast与fail-safe迭代器的区别
+Fail-fast:直接在容器上遍历，遍历时发现数据被修改了，会立刻抛出ConcurrentModificationException异常导致遍历失败。常见的使用fail-fat方式的容器有HashMap和ArrayList
+
+Fail-safe:这种遍历基于容器的一个克隆。ConcurrentHashMap和CopyOnWriteArrayList
+
+页式存储方案是把到来的作业分成大小相等的页，段式存储管理是把一个程序分成若干段进行存储，每个段都是一个逻辑实体。段页式虚拟存储管理是基本分段存储和基本分页存储相结合。先将用户程序分成若干段，再把每个段分成若干页，并为每个段赋予一个段名，页间不要求连续（能动态链接），用分段方法分配管理作业，用分页方法管理内存。特点是空间浪费小，存储共享容易，存储保护容易以及能动态链接。
+段页式管理采用二维地址空间，段号（S），页号（P）,和页内单元号（D）.系统建立两张表，每一作业一张段表，每一段建立一张页表，段表指出该段的页表在内存中的位置，地址变换机构类似页式机制。
+
+如何能使JVM的堆，栈和持久代（perm）发生内存溢出？
+堆中不停new对象
+栈中无线递归调用
+类加载器会占用持久代的空间来存储classes信息。持久代中主要包含以下信息：类方法，类名，常量池以及JVM内部对象等。加载足够多的类时就会导致持久代溢出。
+
+
+
+编程题
+1.	利用递归方法求6！P100
+2.	实现观察者模式（也称为发布订阅模式）
+3.	实现两种单例模式
+4.	合并两个有序链表。值相同的都保留P27
+5.	
+
