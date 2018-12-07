@@ -74,8 +74,6 @@ JPA:@Id
 	序列生成主键：@GeneratedValue
 			  @SequenceGenerator(name = "g_security_factory_info", sequenceName = "s_security_factory_info", allocationSize = 1)
 
-swagger注释API详细说明		 https://blog.csdn.net/xupeng874395012/article/details/68946676
-
 聚集索引与非聚集索引		sql-索引的作用(超详细)		https://www.cnblogs.com/hyd1213126/p/5828937.html
 
 https://www.cnblogs.com/lwbqqyumidi/p/3804883.html		java多线程
@@ -98,7 +96,59 @@ public void update(@BeanParam User user) {
     // Store the user data  
 }  
 
+springboot集成swagger：
+pom引用：
+<dependency>
+<groupId>io.springfox</groupId>
+<artifactId>springfox-swagger2</artifactId>
+</dependency>
 
+<dependency>
+<groupId>io.springfox</groupId>
+<artifactId>springfox-swagger-ui</artifactId>
+</dependency>
+
+swagger配置：
+@Configuration
+@EnableSwagger2
+public class Swagger2Config {
+
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.hikvision.ga.xresmgr.web.modules.business"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("xresmgr--RESTful APIs")
+                .description("XResMgr服务后台RESTful APIs")
+                .version("1.0")
+                .build();
+    }
+
+}
+
+加入swagger注释：API详细说明		 https://blog.csdn.net/xupeng874395012/article/details/68946676
+
+访问swagger-ui，http://localhost:8080/swagger-ui.html
+
+
+ThreadLocal:为变量在每个线程中创建一个副本。用来解决数据库连接，session管理等。
+数据库连接不需要进行共享，如果共享connection，在新建连接和进行数据库操作时出于线程安全的考虑，必须进行同步处理
+用法：ThreadLocal<Long> longLocal = new ThreadLocal<Long>();
+	  longLocal.set(1);
+	  long l = longLocal.get();
+
+	  
+遇到多个构造器参数时用Builder模式。
+重叠构造器模式：多个构造器，参数数目不同。不太灵活。
+Javabean模式：调用无参构造器来创建对象，调用setter方法设置参数。线程安全性不太好。
+Builder模式：设置静态内部类Builder，调用类似于setter的方法设置属性，最后调用无参的build()方法生成对象。
 
 kafaka:分布式发布订阅消息系统和一个强大的队列
 	消息保存在磁盘上，不基于jms
@@ -118,6 +168,19 @@ zookeeper:分布式协调服务	服务注册与发现（dubbo推荐的服务注�
 https://www.cnblogs.com/zhaobingqing/p/6864223.html			SpringData系列四 @Query注解及@Modifying注解
 
 https://baijiahao.baidu.com/s?id=1601157416754874964&wfr=spider&for=pc		JAVA中新生代，老年代，永久代，元空间概述
+
+JMS:java消息中间件技术规范，提供访问消息系统的接口标准。
+消息体类型：
+· TextMessage--一个字符串对象
+· MapMessage--一套名称-值对
+· ObjectMessage--一个序列化的 Java 对象
+· BytesMessage--一个字节的数据流
+· StreamMessage -- Java 原始值的数据流
+消息传递类型：点对点、发布订阅模式
+
+
+
+
 
 
 
