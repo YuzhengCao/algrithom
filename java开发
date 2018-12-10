@@ -180,6 +180,12 @@ maven配置文件<build>标签
             </excludes>  
          </resource>  
     </resources>  
+    <plugins>
+	<plugin>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-maven-plugin</artifactId>
+	</plugin>
+    </plugins>
   ...
 </build> 
 1）defaultGoal
@@ -207,6 +213,7 @@ maven配置文件<build>标签
 10）excludes
    指定哪些文件将被忽略
 
+maven使用详解：https://blog.csdn.net/hcmony/article/details/56013655
 
 
 
