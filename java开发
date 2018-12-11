@@ -215,7 +215,25 @@ maven配置文件<build>标签
 
 maven使用详解：https://blog.csdn.net/hcmony/article/details/56013655
 
+依赖注入三种方式：
+构造器注入：保证注入的组件不可变，并且确保需要的依赖不为空，保证完全初始化的状态
+@Autowired
+public FooController(FooService fooService) {
+	this.fooService = fooService;
+}
+  
+setter注入：setter的方式能用让类在之后重新配置或者重新注入
+private FooService fooService;
+	//使用方式上同，略
+	@Autowired
+	public void setFooService(FooService fooService) {
+	this.fooService = fooService;
+}
 
+field注入：对于IOC容器以外的环境，除了使用反射来提供它需要的依赖之外，无法复用该实现类，使用field注入可能会导致循环依赖
+@Autowired
+//@Inject
+private FooService fooService;
 
 
 
