@@ -235,5 +235,21 @@ field注入：对于IOC容器以外的环境，除了使用反射来提供它需
 //@Inject
 private FooService fooService;
 
+下载csv
+response.setCharacterEncoding("UTF-8");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+String time = sdf.format(new Date());
+String filename = "DETECTOR" + time + ".csv";
+response.setHeader("contentType", "text/html; charset=UTF-8");
+response.setContentType("application/octet-stream");
+response.addHeader("Content-Disposition", "attachment; filename=" + filename);
+
+BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+out.write(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
+for(String data : dataList) {
+   out.write((data +"\n").getBytes("UTF-8"));
+}
+out.flush();
+out.close();
 
 
